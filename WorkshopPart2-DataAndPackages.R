@@ -8,6 +8,7 @@ dig <- read.csv("http://www.columbia.edu/~sjm2186/EPIC_R/dig.csv")
 
 # Slide 12 - exploring data frames
 head(infert)
+head(dig)
 tail(infert)
 str(infert)
 rownames(infert)
@@ -30,19 +31,6 @@ View(infert)
 # passengers on the Titanic: 
 # http://www.columbia.edu/~sjm2186/EPIC_R/titanic.csv
 # Challenge: read the CSV into R and figure out how many rows of data it has.
-
-titanic<- read.csv("http://www.columbia.edu/~sjm2186/EPIC_R/titanic.csv")
-nrow(titanic)
-table(titanic$sex, useNA="always")
-table(titanic$sex, useNA="no")
-table(titanic$age, useNA="always")
-table(titanic$age, useNA="no")
-table(titanic$age)
-table(titanic$age, useNA="ifany")
-table(titanic$sex, useNA="ifany")
-
-prop.table(table(titanic$age))
-prop.table(table(titanic$age, useNA="always"))
 
 
 # Slide 15: Common data operations
@@ -104,10 +92,6 @@ rows_over_40
 table(rows_over_40)
 infert[rows_over_40,]
 infert[infert$age > 40,]
-infert[1,2]
-infert[1,]
-infert[,2]
-head(infert)
 
 older_subcohort <- infert[infert$age > 40,]
 older_subcohort
@@ -123,9 +107,6 @@ table(infert$rows_over_40, infert$age)
 # Challenge: There is a dataset built into R called esoph.  
 # Load it and figure out how many rows it has.
 
-data(esoph)
-esoph[2,3]
-head(esoph)
 
 
 # Slide 24 - Caution about vector conversion
@@ -171,6 +152,14 @@ order(age)
 # Slide 30
 # Challenge: Load the USArrests dataset (built into R) and print 
 # out the list of states, sorted by murder arrest rate 
+
+data(USArrests)
+rownames(USArrests[order(USArrests$Murder),])
+
+USArrests$statename <- rownames(USArrests)
+sortedArrests <- arrange(USArrests, Murder)
+head(sortedArrests)
+sortedArrests$statename
 
 # Slide 32 -- built in utility functions
 str(infert) # show the structure of an object
